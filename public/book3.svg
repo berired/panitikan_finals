@@ -1,0 +1,14 @@
+<svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8C4A0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4A574;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="450" fill="url(#grad3)"/>
+  <text x="150" y="195" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#3D3026" text-anchor="middle">Ang</text>
+  <text x="150" y="225" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#3D3026" text-anchor="middle">Mahiwagang</text>
+  <text x="150" y="255" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#3D3026" text-anchor="middle">Singsing</text>
+  <circle cx="150" cy="320" r="50" fill="none" stroke="#3D3026" stroke-width="8" opacity="0.4"/>
+  <circle cx="150" cy="320" r="35" fill="none" stroke="#3D3026" stroke-width="5" opacity="0.3"/>
+</svg>

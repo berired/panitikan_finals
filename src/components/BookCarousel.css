@@ -1,0 +1,692 @@
+.carousel-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  outline: none;
+  overflow: hidden;
+}
+
+.carousel-container:focus {
+  outline: none;
+}
+
+/* Carousel View */
+.carousel-view {
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  padding-top: 1rem;
+}
+
+.carousel-title-top {
+  text-align: center;
+  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  perspective: 2000px;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.carousel-wrapper:active {
+  cursor: grabbing;
+}
+
+.books-stack {
+  position: relative;
+  width: clamp(200px, 40vw, 350px);
+  height: clamp(300px, 45vh, 450px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-card {
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.book-card.center {
+  cursor: pointer;
+}
+
+.book-card:hover.center {
+  transform: scale(1.05) !important;
+}
+
+.book-cover-wrapper {
+  position: relative;
+  width: clamp(180px, 30vw, 280px);
+  height: clamp(280px, 42vh, 420px);
+  transform-style: preserve-3d;
+}
+
+.book-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 
+    -5px 5px 20px rgba(0, 0, 0, 0.3),
+    -10px 10px 40px rgba(0, 0, 0, 0.2);
+  background: #f5f5f5;
+  transform: translateZ(20px);
+}
+
+.book-spine {
+  position: absolute;
+  left: -20px;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to right, 
+    rgba(139, 115, 85, 0.9), 
+    rgba(139, 115, 85, 0.6));
+  transform: rotateY(-90deg);
+  transform-origin: right;
+  border-radius: 4px 0 0 4px;
+}
+
+.carousel-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.carousel-book-title {
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+  color: var(--primary-color);
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+  font-family: 'Georgia', serif;
+  max-width: 90%;
+  line-height: 1.2;
+  padding: 0 0.5rem;
+}
+
+.book-counter {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.drag-hint {
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  color: var(--text-secondary);
+  opacity: 0.6;
+  font-weight: 400;
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Detail View */
+.detail-view {
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 1rem;
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.back-button {
+  align-self: flex-start;
+  background: transparent;
+  border: 2px solid rgba(139, 115, 85, 0.3);
+  color: var(--primary-color);
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  background: rgba(139, 115, 85, 0.1);
+  border-color: var(--primary-color);
+  transform: translateX(-5px);
+}
+
+.book-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--primary-color);
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: 'Georgia', serif;
+}
+
+.book-author {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  margin: 0;
+  font-style: italic;
+}
+
+.book-description {
+  margin-top: 0.5rem;
+}
+
+.book-description p {
+  font-size: clamp(0.85rem, 1.8vw, 1rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.read-button {
+  align-self: flex-start;
+  background: var(--primary-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+}
+
+.read-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 115, 85, 0.4);
+  background: #A0826D;
+}
+
+.detail-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 2000px;
+}
+
+.book-cover-large-wrapper {
+  position: relative;
+  width: clamp(220px, 35vw, 350px);
+  height: clamp(380px, 55vh, 600px);
+  transform-style: preserve-3d;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotateY(-5deg);
+  }
+  50% {
+    transform: translateY(-15px) rotateY(-5deg);
+  }
+}
+
+.book-cover-large {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 
+    -8px 8px 30px rgba(0, 0, 0, 0.3),
+    -15px 15px 50px rgba(0, 0, 0, 0.2);
+  background: #f5f5f5;
+  transform: translateZ(30px);
+}
+
+.book-spine-large {
+  position: absolute;
+  left: -25px;
+  top: 0;
+  width: 25px;
+  height: 100%;
+  background: linear-gradient(to right, 
+    rgba(139, 115, 85, 0.9), 
+    rgba(139, 115, 85, 0.6));
+  transform: rotateY(-90deg);
+  transform-origin: right;
+  border-radius: 6px 0 0 6px;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.no-results p {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .detail-view {
+    gap: 2rem;
+  }
+
+  .book-cover-large-wrapper {
+    width: 350px;
+    height: 525px;
+  }
+}
+
+@media (max-width: 968px) {
+  .detail-view {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail-info {
+    order: 1;
+    text-align: left;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .detail-cover {
+    order: 2;
+    position: fixed;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .back-button {
+    align-self: flex-start;
+    z-index: 20;
+    position: relative;
+    pointer-events: auto;
+  }
+
+  .read-button {
+    align-self: flex-start;
+    z-index: 20;
+    position: relative;
+    pointer-events: auto;
+  }
+
+  .book-title {
+    text-align: left;
+    z-index: 20;
+    position: relative;
+  }
+
+  .book-author {
+    z-index: 20;
+    position: relative;
+  }
+
+  .book-description {
+    margin-top: 0;
+    z-index: 20;
+    position: relative;
+    max-width: 50%;
+  }
+
+  .book-cover-large-wrapper {
+    width: clamp(200px, 35vw, 350px);
+    height: clamp(350px, 52vh, 550px);
+  }
+  
+  .book-title {
+    font-size: clamp(1.3rem, 4.5vw, 2rem);
+  }
+  
+  .book-author {
+    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+  }
+}
+
+/* Laptop Screens */
+@media (max-width: 1440px) {
+  .carousel-view {
+    gap: 0.4rem;
+  }
+  
+  .carousel-title-top {
+    min-height: 2.5rem;
+    padding: 0.3rem 1rem;
+  }
+  
+  .carousel-book-title {
+    font-size: clamp(1rem, 2.2vw, 1.6rem);
+    line-height: 1.15;
+  }
+  
+  .carousel-info {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Large Tablet */
+@media (max-width: 1200px) {
+  .detail-view {
+    gap: 1.8rem;
+  }
+
+  .book-cover-large-wrapper {
+    width: clamp(280px, 32vw, 350px);
+    height: clamp(450px, 52vh, 525px);
+  }
+  
+  .carousel-view {
+    gap: 0.5rem;
+  }
+  
+  .carousel-book-title {
+    font-size: clamp(0.95rem, 2.2vw, 1.5rem);
+  }
+}
+
+/* Tablet and Below */
+@media (max-width: 1024px) {
+  .carousel-container {
+    padding: 0.75rem;
+  }
+  
+  .carousel-view {
+    gap: 0.6rem;
+  }
+  
+  .books-stack {
+    width: clamp(180px, 38vw, 320px);
+    height: clamp(320px, 52vh, 480px);
+  }
+  
+  .book-cover-wrapper {
+    width: clamp(160px, 28vw, 260px);
+    height: clamp(300px, 48vh, 460px);
+  }
+  
+  .carousel-book-title {
+    font-size: clamp(0.95rem, 2.3vw, 1.4rem);
+    max-width: 85%;
+    padding: 0 0.75rem;
+    line-height: 1.15;
+  }
+  
+  .carousel-info {
+    margin-bottom: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-container {
+    padding: 0.5rem;
+  }
+
+  .carousel-view {
+    gap: 0.8rem;
+  }
+  
+  .books-stack {
+    width: clamp(160px, 45vw, 280px);
+    height: clamp(280px, 48vh, 420px);
+  }
+  
+  .book-cover-wrapper {
+    width: clamp(150px, 40vw, 240px);
+    height: clamp(260px, 45vh, 400px);
+  }
+
+  .book-spine-large {
+    left: -18px;
+    width: 18px;
+  }
+  
+  .book-spine {
+    left: -15px;
+    width: 15px;
+  }
+
+  .detail-info {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .carousel-book-title {
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    max-width: 500px;
+    padding: 0 0.75rem;
+  }
+  
+  .carousel-info {
+    margin-bottom: 2.5rem;
+  }
+  
+  .book-counter {
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    padding: 0.3rem;
+  }
+  
+  .carousel-view {
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+  }
+  
+  .carousel-title-top {
+    min-height: 2.5rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .carousel-wrapper {
+    gap: 0.75rem;
+  }
+  
+  .books-stack {
+    width: clamp(150px, 55vw, 240px);
+    height: clamp(250px, 38vh, 380px);
+  }
+  
+  .book-cover-wrapper {
+    width: clamp(140px, 50vw, 220px);
+    height: clamp(230px, 36vh, 360px);
+  }
+  
+  .book-spine {
+    left: -10px;
+    width: 10px;
+  }
+  
+  .book-spine-large {
+    left: -12px;
+    width: 12px;
+  }
+
+  .carousel-info {
+    gap: 0.2rem;
+    margin-bottom: 1.2rem;
+    margin-top: 0.3rem;
+  }
+  
+  .carousel-book-title {
+    font-size: clamp(0.95rem, 4.5vw, 1.25rem);
+    max-width: 95%;
+    padding: 0 0.4rem;
+    line-height: 1.2;
+  }
+  
+  .book-counter {
+    font-size: clamp(0.75rem, 3.5vw, 0.9rem);
+    letter-spacing: 1.5px;
+  }
+  
+  .detail-view {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .detail-info {
+    order: 1;
+    padding: 0.5rem;
+    gap: 0.75rem;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .detail-cover {
+    order: 2;
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    z-index: 1;
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .back-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    align-self: center;
+  }
+  
+  .read-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    align-self: center;
+  }
+  
+  .book-title {
+    font-size: clamp(1.1rem, 5.5vw, 1.6rem);
+    text-align: center;
+  }
+  
+  .book-author {
+    font-size: clamp(0.75rem, 3.5vw, 0.95rem);
+    text-align: center;
+  }
+  
+  .book-cover-large-wrapper {
+    width: clamp(180px, 60vw, 280px);
+    height: clamp(280px, 45vh, 440px);
+  }
+}
+
+@media (max-width: 360px) {
+  .carousel-container {
+    padding: 0.25rem;
+  }
+  
+  .carousel-view {
+    gap: 0.3rem;
+    padding-top: 0.4rem;
+  }
+  
+  .carousel-title-top {
+    min-height: 2.2rem;
+    padding: 0.3rem 0.4rem;
+  }
+  
+  .books-stack {
+    width: clamp(130px, 58vw, 200px);
+    height: clamp(220px, 36vh, 320px);
+  }
+  
+  .book-cover-wrapper {
+    width: clamp(120px, 52vw, 180px);
+    height: clamp(200px, 34vh, 300px);
+  }
+  
+  .carousel-book-title {
+    font-size: clamp(0.85rem, 4.8vw, 1.05rem);
+    line-height: 1.15;
+    padding: 0 0.3rem;
+  }
+  
+  .carousel-info {
+    margin-bottom: 1rem;
+  }
+  
+  .book-counter {
+    font-size: clamp(0.7rem, 3.2vw, 0.8rem);
+  }
+  
+  .book-cover-large-wrapper {
+    width: clamp(160px, 65vw, 250px);
+    height: clamp(250px, 42vh, 400px);
+  }
+  
+  .book-title {
+    font-size: clamp(1rem, 6vw, 1.4rem);
+  }
+  
+  .book-author {
+    font-size: clamp(0.7rem, 4vw, 0.85rem);
+  }
+  
+  .back-button {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
+  }
+  
+  .read-button {
+    padding: 0.65rem 1.3rem;
+    font-size: 0.85rem;
+  }
+}

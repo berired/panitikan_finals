@@ -1,0 +1,14 @@
+<svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4A574;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8956A;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="300" height="450" fill="url(#grad2)"/>
+  <text x="150" y="180" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#3D3026" text-anchor="middle">Si Pilandok</text>
+  <text x="150" y="210" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#3D3026" text-anchor="middle">at ang Bayan</text>
+  <text x="150" y="240" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#3D3026" text-anchor="middle">ng Bulawan</text>
+  <polygon points="150,290 180,330 120,330" fill="#3D3026" opacity="0.3"/>
+  <circle cx="150" cy="360" r="30" fill="#3D3026" opacity="0.2"/>
+</svg>
