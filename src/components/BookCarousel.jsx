@@ -53,6 +53,7 @@ const BookCarousel = ({ searchQuery }) => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
 
   const filteredBooks = booksData.filter(book =>
     book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -69,22 +70,31 @@ const BookCarousel = ({ searchQuery }) => {
 
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
+    setTouchEnd(e.touches[0].clientX);
+    setIsSwiping(false);
   };
 
   const handleTouchMove = (e) => {
     setTouchEnd(e.touches[0].clientX);
+    const diff = Math.abs(touchStart - e.touches[0].clientX);
+    if (diff > 10) {
+      setIsSwiping(true);
+    }
   };
 
   const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 75) {
-      // Swiped left - go to next
-      handleNext();
+    const swipeDistance = touchStart - touchEnd;
+    if (Math.abs(swipeDistance) > 75) {
+      if (swipeDistance > 0) {
+        // Swiped left - go to next
+        handleNext();
+      } else {
+        // Swiped right - go to prev
+        handlePrev();
+      }
     }
-
-    if (touchStart - touchEnd < -75) {
-      // Swiped right - go to prev
-      handlePrev();
-    }
+    // Reset swiping state after a short delay
+    setTimeout(() => setIsSwiping(false), 100);
   };
 
   const handleMouseDrag = (e, info) => {
@@ -191,7 +201,7 @@ const BookCarousel = ({ searchQuery }) => {
                         duration: 0.5,
                         ease: [0.32, 0.72, 0, 1]
                       }}
-                      onClick={() => isCenter && handleSelectBook(book)}
+                      onClick={() => isCenter && !isSwiping && handleSelectBook(book)}
                     >
                       <div className="book-cover-wrapper">
                         <img 
